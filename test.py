@@ -9,4 +9,5 @@ def je_praštevilo(n):
 for x in range(2, 201):
     if je_praštevilo(x):
         print(x)
+ # napisala sem nekaj drugega
                 
