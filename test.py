@@ -32,5 +32,5 @@ for j in range(4, 200):
     if je_prastevilo:
         print(j)
 
-#poženem kr z uno tipko
+#poženem kr z uno tipko.
 
