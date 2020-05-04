@@ -1,7 +1,8 @@
 # Vislice
 Repozitoriij za skupen projekt pri UVP
 
-- ena
-- dva
-- tri
+Matematiki
+-Josip Plemelj
+-Jurij Vega
+-Ivan Vidav
 
