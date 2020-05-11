@@ -23,8 +23,8 @@ with open('besede.txt', 'r') as dat:
 #RAZRED Igra
 class Igra:
     def __init__(self, geslo, crke=None):
-        self.geslo = geslo
-        self.crke = [] if crke == None else crke #če bomo že kaj uganili želimo da nadaljuje od tu
+        self.geslo = geslo.lower()
+        self.crke = [] if crke == None else crke.lower() #če bomo že kaj uganili želimo da nadaljuje od tu
         # namesto none ne smemo pisati []
 
     def napacne_crke(self):
@@ -72,12 +72,12 @@ class Igra:
                 niz += 'crka' + ' '
         return niz
 
-    def ugibaj(self, velika_crka):          #Metodo ugibaj, ki sprejme črko, jo pretvori v veliko črko, vrne PRAVILNA_CRKA, PONOVLJENA_CRKA, NAPACNA_CRKA, ZMAGA, PORAZ
-        velika_crka = velika_crka.upper()
-        if velika_crka in self.crke:
+    def ugibaj(self, ugibana_crka):          #Metodo ugibaj, ki sprejme črko, jo pretvori v veliko črko, vrne PRAVILNA_CRKA, PONOVLJENA_CRKA, NAPACNA_CRKA, ZMAGA, PORAZ
+        mala_crka = ugibana_crka.lower()
+        if mala_crka in self.crke: # v self.crke si shranjujemo ugibe
             return PONOVLJENA_CRKA
         else: 
-            if velika_crka in self.pravilne_crke():
+            if mala_crka in self.pravilne_crke():
                 if self.poraz():
                     return PORAZ
                 else:
