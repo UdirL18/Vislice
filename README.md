@@ -1,15 +1,6 @@
 # Vislice
 Repozitoriij za skupen projekt pri UVP
 
-Matematiki:
+Naredili bomo program, ki nas bo vodila skozi preprosto igro vislic.
 
-Josip Plemelj
-Jurij Vega
-Ivan Vidav
-
-Predsednik države:
-Borut Pahor
-
-Predsednik vlade:
-Janez Janša
 
