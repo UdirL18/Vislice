@@ -1,8 +1,11 @@
 #uvozimo random zaradi funkcije nova_igra
 import random 
 
+
 #KONSTANTE, ki jih ponavadi definiramo z velikimi tiskanimi črkami
 STEVILO_DOVOLJENIH_NAPAK = 10
+
+ZACETEK = 'Z'
 
 #konstante za rezultate
 PRAVILNA_CRKA = '+'
@@ -72,24 +75,80 @@ class Igra:
                 niz += 'crka' + ' '
         return niz
 
-    def ugibaj(self, ugibana_crka):          #Metodo ugibaj, ki sprejme črko, jo pretvori v veliko črko, vrne PRAVILNA_CRKA, PONOVLJENA_CRKA, NAPACNA_CRKA, ZMAGA, PORAZ
-        mala_crka = ugibana_crka.lower()
-        if mala_crka in self.crke: # v self.crke si shranjujemo ugibe
-            return PONOVLJENA_CRKA
-        else: 
-            if mala_crka in self.pravilne_crke():
-                if self.poraz():
-                    return PORAZ
-                else:
-                    return NAPACNA_CRKA
-            else:
-                if self.zmaga():
-                    return ZMAGA        
-                else: 
-                    return PRAVILNA_CRKA
+    def ugibaj(self, ugibana_crka):
+        ugibana_crka = ugibana_crka.lower()
 
+        if ugibana_crka in self.crke:
+            return PONOVLJENA_CRKA
+
+        self.crke.append(ugibana_crka)
+        
+        if ugibana_crka in self.geslo: #vedmo da je pravilno uganil
+            #uganil je
+            if self.zmaga():
+                return ZMAGA
+            else: 
+                return PRAVILNA_CRKA
+            
+        else: 
+            if self.poraz():
+                return PORAZ
+            else: 
+                return NAPACNA_CRKA
  
 
 def nova_igra():
     return Igra(random.choice(bazen_besed))
+
+class Vislice: #zaobsega več iger, skrbel bo za VEČ iger, imel bo več objektov igra
+    def __init__(self,): #, ni pomembna
+        #slovar ki ID-ju priredi igro
+        self.igre = {} #slovar je funkcija ki slika iz int v objekt (igra, stanje) 
+
+    def prosti_id_igre(self):
+        #""" vrne nek id, ki ga ne uporablja nobena igra"""
+
+        if len(self.igre) == 0: #če je slovar prazen potem sigurno id 0 ni v njem
+            return 0
+        else:
+            return max(self.igre.keys()) + 1 #ključi so idji
+
+
+
+    def nova_igra(self): #nova_igra mora narest novo igro tako da pridobi nov ID in zgnerira igro
+        
+        #dobimo svez id,
+        nov_id = self.prosti_id_igre()
+
+        #naredimo nov igro in
+        sveza_igra = nova_igra()
+
+        #vse to shranimo v self.igre
+        self.igre[nov_id] = (sveza_igra, ZACETEK)
+
+        #vrenemo id
+        return nov_id
+
+
+    def ugibaj(self, id_igre, crka):
+        #vzamemo igro vn, odigramo potezo in shranimo nazaj noter
+        #ko damo igro noter damo noter tudi posodobljeno stanje
+        
+        trenutna_igra,_ =self.igre[id_igre]
+
+        #ugibamo crko 
+        novo_stanje = trenutna_igra.ugibaj(crka)
+
+        #zapišemo posodobljeno stanje in igro nazaj v BAZO 
+        self.igre[id_igre] = (trenutna_igra, novo_stanje)
+
+
+
+
+        
+            
+
+
+
+
 
